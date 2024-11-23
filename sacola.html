@@ -32,7 +32,14 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="index.html">Home</a>
+                        <select class="form-select" aria-label="Selecione um país" id="localizacao">
+                            <option selected>Localização</option>
+                            <option value="BR">Brasil</option>
+                            <option value="EUA">EUA</option>
+                        </select>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="/">Home</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">Lojas</a>
@@ -52,6 +59,9 @@
                         aria-label="Pesquisar">
                     <button class="btn btn-outline-light rounded-0" type="submit">Buscar</button>
                 </form>
+                <a href="/sacola.html">
+                    <i class="bi bi-cart2"></i>
+                </a>
             </div>
         </div>
     </nav>

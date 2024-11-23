@@ -44,10 +44,11 @@ export function carregarItensDaSacola() {
 
     const deleteButton = listItem.querySelector(".delete");
     deleteButton.addEventListener("click", () => {
-
-      listaSacola.removeChild(listItem); // Remove o item da lista visualmente
-      removerProdutoDoLocalStorage(item.nome); // Remove o item do localStorage
-      console.log(item.nome)
+      const confirmacao = confirm("Tem certeza que deseja excluir esse item?");
+      if (confirmacao) {
+        listaSacola.removeChild(listItem); // Remove o item da lista visualmente
+        removerProdutoDoLocalStorage(item.nome); // Remove o item do localStorage
+      }
     });
 
   });

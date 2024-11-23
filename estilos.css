@@ -34,10 +34,15 @@
     color: white;
 }
 
+.botao-favorito {
+    color: black;
+    background-color: transparent;
+    border: none;
+}
+
 .verde-limao {
     color: #DAFF01;
 }
-
 
 .modal-header {
     background-color: black;
@@ -129,6 +134,10 @@ form {
     width: 15px;
     height: 15px;
     font-size: 10px;
+}
+
+.icon-preto {
+    color: black;
 }
 
 @media(min-width: 768px) {
