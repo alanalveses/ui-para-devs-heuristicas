@@ -68,4 +68,24 @@ const numeroDeItens = document.createElement("span");
 numeroDeItens.id = "carrinho-numero";
 numeroDeItens.textContent = quantidadeDeItensNaSacola;
 
-carrinhoIcone.appendChild(numeroDeItens)
+carrinhoIcone.appendChild(numeroDeItens);
+
+const inputPesquisa = document.querySelector("#input-pesquisa");
+const divSugestoes = document.querySelector("#sugestoes-pesquisa");
+
+inputPesquisa.addEventListener("input", () => {
+  const termoPesquisa = inputPesquisa.value.trim();
+
+  if (termoPesquisa) {
+    const sugestoes = ["Camiseta", "Calça", "Sapato"];
+
+    const sugestoesHTML = sugestoes
+      .filter(sugestao => sugestao.toLowerCase().includes(termoPesquisa.toLowerCase()))
+      .map(sugestao => `<div class="sugestao">${sugestao}</div>`)
+      .join("");
+
+    divSugestoes.innerHTML = sugestoesHTML;
+  } else {
+    divSugestoes.innerHTML = ""
+  }
+})

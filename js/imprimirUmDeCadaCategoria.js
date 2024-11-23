@@ -11,10 +11,18 @@ function adicionarProduto(camiseta) {
 
 function atualizarIconeFavorito(botao, favoritar) {
   if (favoritar) {
-    botao.innerHTML = "<i class='bi bi-heart-fill'></i>";
+    botao.innerHTML = "<i class='bi bi-heart-fill icon-preto'></i>";
   } else {
-    botao.innerHTML = "<i class='bi bi-heart'></i>";
+    botao.innerHTML = "<i class='bi bi-heart icon-preto'></i>";
   }
+}
+
+function verificarItemNoCarrinho(produto) {
+  const sacola = JSON.parse(localStorage.getItem("sacola") || []);
+
+  const nomesDosItensNaSacola = sacola.map(item => item.nome);
+
+  return nomesDosItensNaSacola.includes(produto.nome)
 }
 
 export function imprimirUmDeCadaCategoria(produtos) {
@@ -62,6 +70,7 @@ export function imprimirUmDeCadaCategoria(produtos) {
             <img class="modal-imagem" src="${produto.imagens.desktop}" alt="${produto.nome
         }">
             <div>
+            <div id="mensagem-carrinho-${produto.nome.replace(/\s+/g, "-")}"></div>
               <h3>${produto.nome}</h3>
               <p class="modal-description">${produto.descricao}</p>
 
@@ -151,6 +160,13 @@ export function imprimirUmDeCadaCategoria(produtos) {
         localStorage.setItem("favoritos", JSON.stringify(favoritos));
         atualizarIconeFavorito(this, index === -1);
       })
+
+      const mensagemDeAviso = document.querySelector(`#mensagem-carrinho-${produto.nome.replace(/\s+/g, "-")}`)
+
+      if (verificarItemNoCarrinho(produto)) {
+        mensagemDeAviso.innerHTML = "<div class='alert alert-warning' role='alert'> Este item já está no seu carrinho! </div>"
+      }
+
     }
   }
 
