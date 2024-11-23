@@ -31,11 +31,41 @@ function separarCamisetas(produtos) {
   }
 }
 
-fetch("./json/produtos.json")
-  .then((response) => response.json())
-  .then((produtosJSON) => {
-    if (isPaginaCamisetas()) {
-      separarCamisetas(produtosJSON);
-    } else imprimirUmDeCadaCategoria(produtosJSON);
-  })
-  .catch((error) => console.error("Erro ao carregar o arquivo JSON:", error));
+const produtosHTML = document.getElementById("produtos");
+
+function carregarProdutos(localizacao) {
+  while (produtosHTML.firstChild) {
+    produtosHTML.removeChild(produtosHTML.firstChild);
+  }
+
+  let url = "./json/produtos.json";
+  if (localizacao === "EUA") {
+    url = "./json/products.json"
+  }
+
+  fetch(url)
+    .then((response) => response.json())
+    .then((produtosJSON) => {
+      if (isPaginaCamisetas()) {
+        separarCamisetas(produtosJSON);
+      } else imprimirUmDeCadaCategoria(produtosJSON);
+    })
+    .catch((error) => console.error("Erro ao carregar o arquivo JSON:", error));
+}
+
+const localizacao = document.querySelector("#localizacao");
+localizacao.addEventListener("change", function () {
+  carregarProdutos(this.value);
+})
+
+carregarProdutos(localizacao.value);
+
+const sacola = JSON.parse(localStorage.getItem("sacola"));
+const quantidadeDeItensNaSacola = sacola ? sacola.length : 0;
+
+const carrinhoIcone = document.querySelector(".bi-cart2");
+const numeroDeItens = document.createElement("span");
+numeroDeItens.id = "carrinho-numero";
+numeroDeItens.textContent = quantidadeDeItensNaSacola;
+
+carrinhoIcone.appendChild(numeroDeItens)

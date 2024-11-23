@@ -112,7 +112,7 @@ export function imprimirUmDeCadaCategoria(produtos) {
           </div>
     <div class="modal-footer">
             <button type="button" class="btn botao-lilas" id="adicionar-btn-${produto.nome.replace(/\s+/g, "-")}">Adicionar à sacola</button>
-          </div>
+            </div>
         </div>
       `;
 
